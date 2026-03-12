@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JavaScript Practice Questions</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f5f5f5;
+    padding:20px;
+}
+
+.container{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    max-width:700px;
+    margin:auto;
+}
+
+h2{
+    color:#333;
+}
+
+button{
+    padding:8px 15px;
+    margin:5px;
+    border:none;
+    background:#007bff;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
+input{
+    padding:6px;
+    margin:5px;
+}
+
+.result{
+    margin-top:10px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>1. Display Even Numbers (1–100)</h2>
+<button onclick="showEven()">Show Even Numbers</button>
+<div class="result" id="evenResult"></div>
+
+
+<h2>2. Calculator using Switch</h2>
+<input type="number" id="num1" placeholder="Enter number 1">
+<input type="number" id="num2" placeholder="Enter number 2">
+
+<button onclick="calculate('+')">Add</button>
+<button onclick="calculate('-')">Subtract</button>
+<button onclick="calculate('*')">Multiply</button>
+<button onclick="calculate('/')">Divide</button>
+
+<div class="result" id="calcResult"></div>
+
+
+<h2>3. Tax Calculator</h2>
+<input type="number" id="salary" placeholder="Enter Salary">
+<button onclick="findTax()">Calculate Tax</button>
+<div class="result" id="taxResult"></div>
+
+
+<h2>4. Sum of Product of Corresponding Digits</h2>
+<input type="number" id="n1" placeholder="Enter first number">
+<input type="number" id="n2" placeholder="Enter second number">
+<button onclick="digitProduct()">Calculate</button>
+<div class="result" id="digitResult"></div>
+
+</div>
+
+
+<script>
+
+/* 1. Even numbers from 1 to 100 */
+
+function showEven(){
+    let result = "";
+
+    for(let i=1;i<=100;i++){
+        if(i%2==0){
+            result += i + " ";
+        }
+    }
+
+    document.getElementById("evenResult").innerText = result;
+}
+
+
+/* 2. Calculator using switch */
+
+function calculate(op){
+
+    let a = Number(document.getElementById("num1").value);
+    let b = Number(document.getElementById("num2").value);
+    let ans;
+
+    switch(op){
+
+        case '+':
+            ans = a + b;
+            break;
+
+        case '-':
+            ans = a - b;
+            break;
+
+        case '*':
+            ans = a * b;
+            break;
+
+        case '/':
+            ans = b !== 0 ? a / b : "Cannot divide by zero";
+            break;
+
+        default:
+            ans = "Invalid operation";
+    }
+
+    document.getElementById("calcResult").innerText = "Result: " + ans;
+}
+
+
+/* 3. findTax() using switch */
+
+function findTax(){
+
+    let salary = Number(document.getElementById("salary").value);
+    let tax = 0;
+
+    switch(true){
+
+        case (salary > 0 && salary <= 500000):
+            tax = salary * 0;
+            break;
+
+        case (salary > 500000 && salary <= 1000000):
+            tax = salary * 0.10;
+            break;
+
+        case (salary > 1000000 && salary <= 1500000):
+            tax = salary * 0.20;
+            break;
+
+        case (salary > 1500000):
+            tax = salary * 0.30;
+            break;
+
+        default:
+            tax = "Invalid Salary";
+    }
+
+    document.getElementById("taxResult").innerText = "Tax Amount: " + tax;
+}
+
+
+/* 4. Sum of product of corresponding digits */
+
+function digitProduct(){
+
+    let n1 = document.getElementById("n1").value;
+    let n2 = document.getElementById("n2").value;
+
+    let len = Math.max(n1.length, n2.length);
+
+    n1 = n1.padStart(len,'0');
+    n2 = n2.padStart(len,'0');
+
+    let sum = 0;
+
+    for(let i=0;i<len;i++){
+        sum += Number(n1[i]) * Number(n2[i]);
+    }
+
+    document.getElementById("digitResult").innerText = "Result: " + sum;
+}
+
+</script>
+
+</body>
+</html>
